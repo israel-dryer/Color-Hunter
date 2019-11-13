@@ -3,7 +3,6 @@
     Author      :   Israel Dryer
     Modified    :   2019-11-13
 """
-from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
