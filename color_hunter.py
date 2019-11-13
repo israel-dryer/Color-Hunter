@@ -32,6 +32,7 @@ while True:
 # extract color palettes from html source
 soup = BeautifulSoup(bot.page_source)
 pal = soup.find_all("div",{"class":"palette"})
+bot.quit()
 
 # iterate through each color palette and save to themes
 themes = {}
@@ -68,7 +69,7 @@ for key, val in themes.items():
     text_color = get_contrast_yiq(prime)
     themes[key] = val + (text_color,)
 
-# export new colors with contrasting text color
+export new colors with contrasting text color
 with open('themes.py','w') as f:
     f.write('themes = {\n')
     for key, val in themes.items():
