@@ -1,7 +1,7 @@
 # Color-Hunter
  A program for scraping color themes from the [colorhunt website](https://colorhunt.co/palettes)
  
- The script downloads all available color themes. You may need to adjust the `sleep()` time depending on your internet connection. This allows the screen to load while scrolling down the page to load more data.  
+ The [color-hunter.py](color-hunter.py) script downloads all available color themes. You may need to adjust the `sleep()` time depending on your internet connection. This allows the screen to load while scrolling down the page to load more data.  
  
  The script will return a dictionary containing an ID and a tuple of hexadecimal colors, the last of which is a text color of black or white, which has been programmed based on the best contrast of the primary color (index 0) in the tuple.
  
