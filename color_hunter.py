@@ -41,7 +41,7 @@ for row in pal:
     c1 = color[3].text
     c2 = color[2].text 
     c3 = color[1].text
-    c4 = color[1].text
+    c4 = color[0].text
     theme_name = color[0].a['href'].split('/').pop()
     if theme_name:
         themes[theme_name] = (c1, c2, c3, c4)
