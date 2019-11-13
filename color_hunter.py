@@ -69,8 +69,8 @@ for key, val in themes.items():
     text_color = get_contrast_yiq(prime)
     themes[key] = val + (text_color,)
 
-export new colors with contrasting text color
-with open('themes.py','w') as f:
+# export new colors with contrasting text color
+with open('themes_dict.py','w') as f:
     f.write('themes = {\n')
     for key, val in themes.items():
         f.write(f"\t'{key}': {val},\n")
