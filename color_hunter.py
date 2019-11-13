@@ -46,7 +46,6 @@ for row in pal:
     if theme_name:
         themes[theme_name] = (c1, c2, c3, c4)
 
-print(themes)
 
 # ---- get contrasting text color --------------------------------------------
 # adapted to python from: https://24ways.org/2010/calculating-color-contrast/
