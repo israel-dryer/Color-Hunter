@@ -11,7 +11,7 @@
  
  The `chromedriver.exe` file should be saved in a directory that is accessible from **PATH**. You may put it into the same folder as your `python.exe` file if you wish, or pass the path as a parameter in `webdriver()`. 
  
-Other required libraries:
+Other required libraries (Python 3.7):
 ```
 pip install selenium
 pip install bs4
