@@ -63,11 +63,13 @@ def get_contrast_yiq(hex_color):
     else:
         return '#FFFFFF' # white
 
-# add a constrasting color to each theme in the color_hunt dictionary
+# add a constrasting primary and secondary text colors (black/white)
 for key, val in themes.items():
-    prime = val[0]
-    text_color = get_contrast_yiq(prime)
-    themes[key] = val + (text_color,)
+    text1 = get_contrast_yiq(val[0])
+    text2 = get_contrast_yiq(val[1])
+    text3 = get_contrast_yiq(val[2])
+    text4 = get_contrast_yiq(val[3])
+    themes[key] = val + (text1, text2, text3, text4)
 
 # export new colors with contrasting text color
 with open('themes_dict.py','w') as f:
