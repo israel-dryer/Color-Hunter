@@ -1,18 +1,19 @@
 """
     Color Hunter - A script for scraping color themes from the colorhunt.co website
     Author      :   Israel Dryer
-    Modified    :   2019-11-13
+    Modified    :   2019-11-14
 """
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from time import sleep
+import requests
 
 # ---- scrape colors from internet -------------------------------------------
 chrome_options = Options()
 chrome_options.add_argument("--dns-prefetch-disable")
 chrome_options.add_argument("--no-proxy-server")
-bot = webdriver.Chrome(chrome_options=chrome_options)
+bot = webdriver.Chrome(options=chrome_options)
 
 url = "https://colorhunt.co/palettes"
 
@@ -47,7 +48,7 @@ for row in pal:
         themes[theme_name] = (c1, c2, c3, c4)
 
 
-# ---- get contrasting text color --------------------------------------------
+# get contrasting text color 
 # adapted to python from: https://24ways.org/2010/calculating-color-contrast/
 
 def get_contrast_yiq(hex_color):
@@ -65,13 +66,28 @@ def get_contrast_yiq(hex_color):
 
 # add a constrasting primary and secondary text colors (black/white)
 for key, val in themes.items():
-    text1 = get_contrast_yiq(val[0])
-    text2 = get_contrast_yiq(val[1])
-    text3 = get_contrast_yiq(val[2])
-    text4 = get_contrast_yiq(val[3])
-    themes[key] = val + (text1, text2, text3, text4)
+    text0 = get_contrast_yiq(val[0])
+    text1 = get_contrast_yiq(val[1])
+    text2 = get_contrast_yiq(val[2])
+    text3 = get_contrast_yiq(val[3])
+    themes[key] = ((val[0], text0), (val[1], text1), (val[2], text2), (val[3], text3))
 
-# export new colors with contrasting text color
+# add hash tags to aid in theme naming
+for key, val in themes.items():
+    r = requests.get(f'https://colorhunt.co/palette/{int(key)}')
+    soup = BeautifulSoup(r.text)
+    scripts = soup.find_all('script')
+    hash_script = scripts[7]
+    hashes = hash_script.text.split(';')
+    for row in hashes:
+        if row.strip()[:5] == 'focus':
+            key_hashes = row.strip().replace('focus','').replace('(','').replace(')','').replace("'",'').split()
+            themes[key] = val + (key_hashes,)
+            break
+    # add small delay to prevent exceeding url request limit
+    sleep(0.05)
+
+# export colors to python file
 with open('themes_dict.py','w') as f:
     f.write('themes = {\n')
     for key, val in themes.items():
