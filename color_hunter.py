@@ -53,7 +53,6 @@ for row in pal:
 
 def get_contrast_yiq(hex_color):
     """ get contrasting black or white text color for a hex color """
-    # convert hex to rbg
     r = int(hex_color[1:3], 16)
     g = int(hex_color[3:5], 16)
     b = int(hex_color[5:7], 16)
